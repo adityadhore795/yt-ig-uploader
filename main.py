@@ -6,7 +6,7 @@ import shutil
 # === CONFIG ===
 YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@Knot_Master/shorts"
 DROPBOX_UPLOAD_PATH = "/knotmaster/"
-COOKIES_FILE = "cookies.txt"
+COOKIES_FILE = os.path.join(os.path.dirname(__file__), "cookies.txt")
 UPLOADED_IDS_FILE = "uploaded_ids.txt"
 
 APP_KEY = "kl4k2jflpzj9xbl"
