@@ -6,7 +6,7 @@ import shutil
 # === CONFIG ===
 YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@Knot_Master/shorts"
 DROPBOX_UPLOAD_PATH = "/knotmaster/"
-COOKIES_FILE = "cookies.txt"
+COOKIES_FILE = os.path.join(os.path.dirname(__file__), "cookies.txt")
 UPLOADED_IDS_FILE = "uploaded_ids.txt"
 
 APP_KEY = "kl4k2jflpzj9xbl"
@@ -51,12 +51,10 @@ for entry in entries:
     print("✅ Found new video:", video_url)
 
     # === DOWNLOAD THE NEW VIDEO ===
-  ydl_opts_download = {
-    'cookies': COOKIES_FILE,
-    'format': 'best[ext=mp4]/best',
-    'quiet': False,
-    'noplaylist': True,
-}
+    ydl_opts_download = {
+        'cookies': COOKIES_FILE,
+        'format': 'best[ext=mp4]/best',
+    }
 
     with yt_dlp.YoutubeDL(ydl_opts_download) as ydl:
         info = ydl.extract_info(video_url, download=True)
@@ -82,14 +80,9 @@ for entry in entries:
 
     # === DELETE OLD FILES (Keep only the latest 8) ===
     folder_path = "/knotmaster/"
-
-    # List files in the folder
     res = dbx.files_list_folder(folder_path)
-
-    # Sort files by modified time (newest first)
     sorted_files = sorted(res.entries, key=lambda x: x.server_modified, reverse=True)
 
-    # Delete older files beyond the latest 8
     for file in sorted_files[8:]:
         dbx.files_delete_v2(file.path_lower)
         print("🗑️ Deleted old file:", file.name)
