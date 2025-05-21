@@ -52,7 +52,7 @@ for entry in entries:
 
     # === DOWNLOAD THE NEW VIDEO ===
     ydl_opts_download = {
-        'cookiefile': 'cookies.txt',
+        'cookies': os.path.join(os.path.dirname(__file__), 'cookies.txt'),
         'format': 'best[ext=mp4]/best',
     }
 
