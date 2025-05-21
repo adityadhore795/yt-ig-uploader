@@ -51,10 +51,18 @@ for entry in entries:
     print("✅ Found new video:", video_url)
 
     # === DOWNLOAD THE NEW VIDEO ===
-    ydl_opts_download = {
-        'cookies': os.path.join(os.path.dirname(__file__), 'cookies.txt'),
-        'format': 'best[ext=mp4]/best',
-    }
+import os
+
+cookie_path = os.path.join(os.path.dirname(__file__), 'cookies.txt')
+print("🔍 Looking for cookies.txt at:", cookie_path)
+print("📂 File exists?", os.path.exists(cookie_path))
+
+ydl_opts = {
+    'format': 'mp4',
+    'outtmpl': 'video.mp4',
+    'cookies': cookie_path,
+    'quiet': True,
+}
 
     with yt_dlp.YoutubeDL(ydl_opts_download) as ydl:
         info = ydl.extract_info(video_url, download=True)
