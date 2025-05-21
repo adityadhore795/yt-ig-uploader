@@ -6,7 +6,7 @@ import shutil
 # === CONFIG ===
 YOUTUBE_CHANNEL_URL = "https://www.youtube.com/@Knot_Master/shorts"
 DROPBOX_UPLOAD_PATH = "/knotmaster/"
-COOKIES_FILE = os.path.join(os.path.dirname(__file__), "cookies.txt")
+'cookies': "cookies.txt"
 UPLOADED_IDS_FILE = "uploaded_ids.txt"
 
 APP_KEY = "kl4k2jflpzj9xbl"
@@ -51,10 +51,12 @@ for entry in entries:
     print("✅ Found new video:", video_url)
 
     # === DOWNLOAD THE NEW VIDEO ===
-    ydl_opts_download = {
-        'cookies': COOKIES_FILE,
-        'format': 'best[ext=mp4]/best',
-    }
+  ydl_opts_download = {
+    'cookies': COOKIES_FILE,
+    'format': 'best[ext=mp4]/best',
+    'quiet': False,
+    'noplaylist': True,
+}
 
     with yt_dlp.YoutubeDL(ydl_opts_download) as ydl:
         info = ydl.extract_info(video_url, download=True)
