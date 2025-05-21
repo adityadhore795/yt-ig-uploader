@@ -52,7 +52,7 @@ for entry in entries:
 
     # === DOWNLOAD THE NEW VIDEO ===
     ydl_opts_download = {
-        'cookies': COOKIES_FILE,
+        'cookiefile': 'cookies.txt',
         'format': 'best[ext=mp4]/best',
     }
 
