@@ -2,7 +2,7 @@ import os
 import yt_dlp
 
 # Debugging cookies.txt location
-cookie_path = os.path.join(os.path.dirname(__file__), 'cookies.txt')
+cookie_path = os.path.join(os.path.dirname(__file__), 'cookies3.txt')
 print("🔍 Looking for cookies.txt at:", cookie_path)
 print("📂 File exists?", os.path.exists(cookie_path))
 
